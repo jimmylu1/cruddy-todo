@@ -46,26 +46,6 @@ exports.readOne = (id, callback) => {
 };
 
 exports.update = (id, text, callback) => {
-  // var item = items[id];
-  // if (!item) {
-  //   callback(new Error(`No item with id: ${id}`));
-  // } else {
-  //   items[id] = text;
-  //   callback(null, { id, text });
-  // }
-  // let link = path.join(exports.dataDir, `/${id}.txt`);
-  // fs.readFile(link, 'utf8', (err, msg) => {
-  //   if (err) {
-  //     callback(err, 0);
-  //   } else {
-  //     fs.writeFile(link, text, (err) => {
-  //       console.log(`${id}.txt`);
-  //       if (err) {
-  //         callback(err, 0);
-  //       }
-  //     });
-  //   }
-  // });
   exports.readOne(id, (err, data) => {
     if (err) {
       callback(err, 0);
@@ -81,20 +61,15 @@ exports.update = (id, text, callback) => {
   });
 };
 
-// var result = data.replace(/string to be replaced/g, 'replacement');
-//read file, change text inside
-//callback
-
-
 exports.delete = (id, callback) => {
-  var item = items[id];
-  delete items[id];
-  if (!item) {
-    // report an error if item not found
-    callback(new Error(`No item with id: ${id}`));
-  } else {
-    callback();
-  }
+
+  fs.unlink(`${exports.dataDir}/${id}.txt`, (err) => {
+    if(err) {
+      callback(err, 0);
+    } else {
+      callback(null);
+    }
+  });
 };
 
 // Config+Initialization code -- DO NOT MODIFY /////////////////////////////////
