@@ -64,7 +64,7 @@ exports.update = (id, text, callback) => {
 exports.delete = (id, callback) => {
 
   fs.unlink(`${exports.dataDir}/${id}.txt`, (err) => {
-    if(err) {
+    if (err) {
       callback(err, 0);
     } else {
       callback(null);
