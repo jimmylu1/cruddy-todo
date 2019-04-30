@@ -50,11 +50,11 @@ exports.update = (id, text, callback) => {
     if (err) {
       callback(err, 0);
     } else {
-      fs.writeFile(`${exports.dataDir}/${id}.txt`, text, (err) => {
+      fs.writeFile(`${exports.dataDir}/${id}.txt`, text, (err, data) => {
         if (err) {
           callback(err, 0);
         } else {
-          callback(null, text);
+          callback(null, {id, text: text});
         }
       });
     }
