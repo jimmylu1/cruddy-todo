@@ -9,7 +9,7 @@ var items = {};
 
 exports.create = (text, callback) => {
   counter.getNextUniqueId((err, id) => {
-    fs.writeFile(path.join(__dirname, `/dataDir/${id}.txt`), text, (err) => {
+    fs.writeFile(`${exports.dataDir}/${id}.txt`, text, (err) => {
       if (err) {
         callback(null, 0);
       } else {
