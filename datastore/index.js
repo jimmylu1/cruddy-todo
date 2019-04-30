@@ -20,10 +20,18 @@ exports.create = (text, callback) => {
 };
 
 exports.readAll = (callback) => {
-  var data = _.map(items, (text, id) => {
-    return { id, text };
+  fs.readdir(exports.dataDir, (err, data) => {
+    if (err) {
+      callback(null, 0);
+    } else {
+      let arr = [];
+      data.forEach(id => {
+        let newId = id.slice(0, -4);
+        arr.push({id: newId, text: newId});
+      });
+      callback(null, arr);
+    }
   });
-  callback(null, data);
 };
 
 exports.readOne = (id, callback) => {
